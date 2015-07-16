@@ -1,0 +1,15 @@
+$page.setTitle("Include")
+<h1>设计模式的一些总结</h1>
+
+<li>
+    <h2>单件模式</h2>
+
+    #set($url = "$app2Link.setTarget('simple/singleton')")
+    <a href="$url">$url</a>
+</li>
+<li>
+    <h2>外观模式</h2>
+
+    #set($url = "$app2Link.setTarget('simple/nihao.do')")
+    <a href="$url">$url</a>
+</li>

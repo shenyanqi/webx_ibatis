@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.alibaba.webx.webxdemo.app1.dao.UserDao">
+   
+    <typeAlias alias="UserBean" type="com.alibaba.webx.webxdemo.app1.UserBean" />
+    <typeAlias alias="InquiryBean" type="com.alibaba.webx.webxdemo.app1.InquiryBean"/>
+    
+    <!--
+      - ===============================================
+      - 验证userId、password，并返回user、account、profile
+      - ===============================================
+     -->
+     <resultMap id="userResult" class="UserBean">
+        <result property="userId" column="NAME" />
+        <result property="password" column="PASSWORD" />
+        <result property="phone" column="PHONE" />
+        <result property="email" column="EMAIL" />
+        
+     
+    </resultMap>
+    <select id="basicQuery" resultMap="userResult" parameterClass ="String"><![CDATA[
+        select name,password,phone,email from user where name = #userId#
+    ]]></select>
+   <select id="querylist" resultMap="userResult" parameterClass="InquiryBean"><![CDATA[
+        select name,password,phone,email from user where $inquiryType$ = #inquiryContent# 
+   ]]></select>
+    
+    <!--
+      - ===============================================
+      - 创建一个user对象
+      - ===============================================
+     -->
+    <insert id="insertUser" parameterClass="UserBean"><![CDATA[
+        insert into USER (
+                name,
+                password,
+                phone,
+                email
+        ) values (
+                #userId#,
+                #password#,
+                #phone#,
+                #email#
+        )
+    ]]></insert>
+    <!--
+      - ===============================================
+      - 更新一个user对象
+      - ===============================================
+     -->
+    <update id="updateUser" parameterClass="UserBean"><![CDATA[
+        update
+                USER
+        set
+                password = #password#,
+                phone = #phone#,
+                email = #email#
+        where
+                name = #userId#
+    ]]></update>
+    
+</sqlMap>

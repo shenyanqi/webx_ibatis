@@ -1,0 +1,65 @@
+#macro (registerMessage $field) 
+    #if (!$field.valid) $field.message #end
+#end
+
+<form action="" method="post"> 
+  <input type="hidden" name="action" value="UserAction"/> 
+
+  #set ($group = $form.register.defaultInstance) 
+  
+  <p>用户注册</p>
+
+  <dl>
+    <dt>用户名</dt>
+    <dd>
+        <div>
+            <input type="text" name="$group.userId.key" value="$!group.userId.value"/> 
+        </div>
+        <div class="errorMessage">
+            #registerMessage ($group.userId) 
+        </div>
+    </dd>
+
+    <dt>密码</dt>
+    <dd>
+        <div>
+            <input type="password" name="$group.password.key" value="$!group.password.value"/> 
+        </div>
+        <div class="errorMessage">
+            #registerMessage ($group.password) 
+        </div>
+    </dd>
+
+    <dt>再输一遍密码</dt>
+    <dd>
+        <div>
+            <input type="password" name="$group.passwordConfirm.key" value="$!group.passwordConfirm.value"/> 
+        </div>
+        <div class="errorMessage">
+            #registerMessage ($group.passwordConfirm) 
+        </div>
+    </dd>
+  </dl>
+  <dt>电话</dt>
+    <dd>
+        <div>
+            <input type="phone" name="$group.phone.key" value="$!group.phone.value"/> 
+        </div>
+        <div class="errorMessage">
+            #registerMessage ($group.phone) 
+        </div>
+    </dd>
+  <dt>E-mail</dt>
+    <dd>
+        <div>
+            <input type="email" name="$group.email.key" value="$!group.email.value"/> 
+        </div>
+        <div class="errorMessage">
+            #registerMessage ($group.email) 
+        </div>
+    </dd>
+  <p>
+      <input type="submit" name="event_submit_do_register" value="立即注册！"/> 
+  </p>
+
+</form>
